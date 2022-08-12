@@ -4,10 +4,6 @@
 #![cfg(not(feature = "unprefixed_malloc_on_supported_platforms"))]
 #![cfg(not(target_env = "musl"))]
 
-extern crate jemalloc_ctl;
-extern crate jemallocator;
-extern crate libc;
-
 use jemallocator::Jemalloc;
 
 #[global_allocator]
@@ -32,5 +28,5 @@ pub static malloc_conf: Option<&'static libc::c_char> = Some(unsafe {
 #[test]
 fn background_threads_enabled() {
     // Background threads are unconditionally enabled at run-time by default.
-    assert_eq!(jemalloc_ctl::opt::background_thread::read().unwrap(), true);
+    assert!(jemalloc_ctl::opt::background_thread::read().unwrap());
 }

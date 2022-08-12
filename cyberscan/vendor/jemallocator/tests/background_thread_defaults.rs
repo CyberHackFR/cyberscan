@@ -1,9 +1,5 @@
 //! Test background threads run-time default settings.
 
-extern crate jemalloc_ctl;
-extern crate jemallocator;
-extern crate libc;
-
 use jemallocator::Jemalloc;
 
 #[global_allocator]

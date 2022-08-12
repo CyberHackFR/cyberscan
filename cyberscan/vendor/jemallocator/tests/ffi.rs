@@ -1,6 +1,4 @@
 extern crate jemalloc_sys as ffi;
-extern crate jemallocator;
-extern crate libc;
 
 use std::mem;
 use std::ptr;

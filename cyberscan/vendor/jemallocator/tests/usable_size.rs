@@ -1,5 +1,3 @@
-extern crate jemallocator;
-
 use jemallocator::Jemalloc;
 
 #[global_allocator]

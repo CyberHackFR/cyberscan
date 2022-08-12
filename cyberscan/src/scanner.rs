@@ -4,9 +4,10 @@ use crate::modules::HttpModule;
 use crate::ports;
 use crate::profile::Profile;
 use crate::report::Host;
-use crate::report::ReportV1;
+use crate::report::ReportC;
 use crate::{Error, Report};
 use chrono::Utc;
+use chrono::format;
 use futures::stream;
 use futures::StreamExt;
 use reqwest::Client;
@@ -43,7 +44,7 @@ impl Scanner {
 
     pub async fn scan(&self, target: &str, profile: Profile) -> Result<Report, Error> {
         let aggressive_modules_enabled = profile.aggressive_modules;
-        let mut report = ReportV1 {
+        let mut report = ReportC {
             started_at: Utc::now(),
             completed_at: Utc::now(),
             duration_ms: 0,
@@ -149,6 +150,6 @@ impl Scanner {
         let scan_duration = report.completed_at - report.started_at;
         report.duration_ms = scan_duration.num_milliseconds() as u64;
 
-        Ok(Report::V1(report))
+        Ok(Report::CyberScan(report))
     }
 }

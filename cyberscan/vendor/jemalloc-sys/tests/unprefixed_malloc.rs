@@ -1,6 +1,3 @@
-extern crate jemalloc_sys;
-extern crate libc;
-
 #[cfg(prefixed)]
 #[test]
 fn malloc_is_prefixed() {

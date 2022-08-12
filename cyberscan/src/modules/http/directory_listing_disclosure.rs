@@ -81,8 +81,8 @@ mod tests {
     async fn is_directory_listing() {
         let module = DirectoryListingDisclosure::new();
 
-        let body = String::from("Content <title>Index of kerkour.com</title> test");
-        let body2 = String::from(">ccece> Contrnt <tle>Index of kerkour.com</title> test");
+        let body = String::from("Content <title>Index of cyberhack.fr</title> test");
+        let body2 = String::from(">ccece> Contrnt <tle>Index of cyberhack.fr</title> test");
         let body3 = String::from("");
         let body4 = String::from("lol lol lol ol ol< LO> OL  <title>Index</title> test");
 

@@ -1,6 +1,6 @@
 # jemalloc-sys - Rust bindings to the `jemalloc` C library
 
-[![Travis-CI Status]][travis] [![Appveyor Status]][appveyor] [![Latest Version]][crates.io] [![docs]][docs.rs]
+[![Travis-CI Status]][travis] [![Latest Version]][crates.io] [![docs]][docs.rs]
 
 > Note: the Rust allocator API is implemented for `jemalloc` in the
 > [`jemallocator`](https://crates.io/crates/jemallocator) crate.
@@ -8,7 +8,6 @@
 ## Documentation
 
 * [Latest release (docs.rs)][docs.rs]
-* [master branch`][master_docs]
 
 `jemalloc` is a general purpose memory allocator, its documentation
 
@@ -20,7 +19,7 @@
 [jemalloc_docs]: http://jemalloc.net/jemalloc.3.html
 [jemalloc_wiki]: https://github.com/jemalloc/jemalloc/wiki
 
-**Current jemalloc version**: 5.1.
+**Current jemalloc version**: 5.2.1.
 
 ## Platform support
 
@@ -144,10 +143,6 @@ hyphens `-` are replaced with underscores `_`(see
   virtual address size on those platforms where it knows how, and picks a
   default otherwise. This option may be useful when cross-compiling.
 
-* `JEMALLOC_SYS_GIT_DEV_BRANCH`: when this environment variable is defined, the
-  latest commit from `jemalloc`'s dev branch is fetched from
-  `https://github.com/jemalloc/jemalloc` and built.
-
 [jemalloc_install]: https://github.com/jemalloc/jemalloc/blob/dev/INSTALL.md#advanced-configuration
 
 ## License
@@ -167,12 +162,9 @@ Unless you explicitly state otherwise, any contribution intentionally submitted
 for inclusion in `jemalloc-sys` by you, as defined in the Apache-2.0 license,
 shall be dual licensed as above, without any additional terms or conditions.
 
-[travis]: https://travis-ci.org/gnzlbg/jemallocator
-[Travis-CI Status]: https://travis-ci.org/gnzlbg/jemallocator.svg?branch=master
-[appveyor]: https://ci.appveyor.com/project/gnzlbg/jemallocator/branch/master
-[Appveyor Status]: https://ci.appveyor.com/api/projects/status/github/gnzlbg/jemallocator?branch=master&svg=true
-[Latest Version]: https://img.shields.io/crates/v/jemalloc-sys.svg
-[crates.io]: https://crates.io/crates/jemalloc-ctl
-[docs]: https://docs.rs/jemalloc-sys/badge.svg
-[docs.rs]: https://docs.rs/jemalloc-sys/
-[master_docs]: https://gnzlbg.github.io/jemallocator/jemalloc-sys
+[travis]: https://travis-ci.com/tikv/jemallocator
+[Travis-CI Status]: https://travis-ci.com/tikv/jemallocator.svg?branch=master
+[Latest Version]: https://img.shields.io/crates/v/jemallocator.svg
+[crates.io]: https://crates.io/crates/jemallocator
+[docs]: https://docs.rs/jemallocator/badge.svg
+[docs.rs]: https://docs.rs/jemallocator/

@@ -1,7 +1,5 @@
 #![cfg_attr(feature = "alloc_trait", feature(allocator_api))]
 
-extern crate jemallocator;
-
 use jemallocator::Jemalloc;
 
 #[global_allocator]

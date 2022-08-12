@@ -45,9 +45,9 @@
     feature = "cargo-clippy",
     allow(clippy::cast_possible_truncation, clippy::cast_possible_wrap)
 )]
-#![deny(missing_docs, intra_doc_link_resolution_failure)]
-
-extern crate libc;
+// TODO: rename the following lint on next minor bump
+#![allow(renamed_and_removed_lints)]
+#![deny(missing_docs, broken_intra_doc_links)]
 
 use libc::{c_char, c_int, c_uint, c_void, size_t};
 type c_bool = c_int;
@@ -59,7 +59,7 @@ type c_bool = c_int;
 ///
 /// It does not validate that `la` is within the valid range.
 #[inline]
-pub fn MALLOCX_LG_ALIGN(la: usize) -> c_int {
+pub const fn MALLOCX_LG_ALIGN(la: usize) -> c_int {
     la as c_int
 }
 
@@ -70,7 +70,7 @@ pub fn MALLOCX_LG_ALIGN(la: usize) -> c_int {
 ///
 /// This macro does not validate that a is a power of 2.
 #[inline]
-pub fn MALLOCX_ALIGN(aling: usize) -> c_int {
+pub const fn MALLOCX_ALIGN(aling: usize) -> c_int {
     aling.trailing_zeros() as c_int
 }
 
@@ -90,7 +90,7 @@ pub const MALLOCX_ZERO: c_int = 0x40;
 /// `tc` must have been acquired via the `tcache.create mallctl`. This function
 /// does not validate that `tc` specifies a valid identifier.
 #[inline]
-pub fn MALLOCX_TCACHE(tc: usize) -> c_int {
+pub const fn MALLOCX_TCACHE(tc: usize) -> c_int {
     tc.wrapping_add(2).wrapping_shl(8) as c_int
 }
 
@@ -104,10 +104,7 @@ pub fn MALLOCX_TCACHE(tc: usize) -> c_int {
 /// This option cannot be used in the same `flags` argument as
 /// `MALLOCX_TCACHE(tc)`.
 // FIXME: This should just be a const.
-#[inline]
-pub fn MALLOCX_TCACHE_NONE() -> c_int {
-    MALLOCX_TCACHE(!0)
-}
+pub const MALLOCX_TCACHE_NONE: c_int = MALLOCX_TCACHE((-1isize) as usize);
 
 /// Use the arena specified by the index `a`.
 ///
@@ -119,7 +116,7 @@ pub fn MALLOCX_TCACHE_NONE() -> c_int {
 /// This function does not validate that `a` specifies an arena index in the
 /// valid range.
 #[inline]
-pub fn MALLOCX_ARENA(a: usize) -> c_int {
+pub const fn MALLOCX_ARENA(a: usize) -> c_int {
     (a as c_int).wrapping_add(1).wrapping_shl(20)
 }
 
@@ -366,14 +363,13 @@ extern "C" {
     ///
     /// This makes the space available for future allocations.
     ///
-    /// If `ptr` is null, no action occurs.
-    ///
     /// # Safety
     ///
     /// The behavior is _undefined_ if:
     ///
     /// * `ptr` does not match a pointer earlier returned by the memory
     ///   allocation functions of this crate, or
+    /// * `ptr` is null, or
     /// * the memory region referenced by `ptr` has been deallocated.
     #[cfg_attr(prefixed, link_name = "_rjem_dallocx")]
     pub fn dallocx(ptr: *mut c_void, flags: c_int);
@@ -382,8 +378,6 @@ extern "C" {
     /// `size` hint.
     ///
     /// This makes the space available for future allocations.
-    ///
-    /// If `ptr` is null, no action occurs.
     ///
     /// # Safety
     ///
@@ -395,6 +389,7 @@ extern "C" {
     /// [`xallocx`],
     /// * `ptr` does not match a pointer earlier returned by the memory
     ///   allocation functions of this crate, or
+    /// * `ptr` is null, or
     /// * the memory region referenced by `ptr` has been deallocated.
     #[cfg_attr(prefixed, link_name = "_rjem_sdallocx")]
     pub fn sdallocx(ptr: *mut c_void, size: size_t, flags: c_int);
@@ -901,3 +896,8 @@ pub extern "C" fn pthread_atfork(
 ) -> i32 {
     0
 }
+
+#[allow(missing_docs)]
+mod env;
+
+pub use env::*;

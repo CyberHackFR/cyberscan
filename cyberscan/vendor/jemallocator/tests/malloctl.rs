@@ -1,7 +1,3 @@
-extern crate jemalloc_ctl;
-extern crate jemallocator;
-extern crate libc;
-
 use jemalloc_ctl::{Access, AsName};
 use jemallocator::Jemalloc;
 use std::alloc::{GlobalAlloc, Layout};

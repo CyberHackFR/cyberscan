@@ -1,6 +1,3 @@
-extern crate jemalloc_sys;
-extern crate libc;
-
 union U {
     x: &'static u8,
     y: &'static libc::c_char,

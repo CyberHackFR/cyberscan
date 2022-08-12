@@ -8,11 +8,11 @@ use std::net::IpAddr;
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
 pub enum Report {
-    V1(ReportV1),
+    CyberScan(ReportC),
 }
 
 #[derive(Debug, Clone, Deserialize, Serialize)]
-pub struct ReportV1 {
+pub struct ReportC {
     pub target: String,
     pub started_at: DateTime<Utc>,
     pub completed_at: DateTime<Utc>,
