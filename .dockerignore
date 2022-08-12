@@ -1,0 +1,7 @@
+.venv
+/Dockerfile
+
+/cyberscan/_data/
+/cyberscan/dist/
+/cyberscan/.env
+/cyberscan/target/
